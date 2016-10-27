@@ -2,7 +2,7 @@
 
 My mobile application will be about Cars. The app will present photos, hystory and specification on cars.
 
-<b>Features:<b><br>
+<h3>Features:</h3><br>
 	<ul>
 		<li>moderators can add new cars to the app and modify existing ones;</li>
 		<li>the list of cars will be searchable;</li>
