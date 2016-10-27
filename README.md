@@ -12,4 +12,4 @@ My mobile application will be about Cars. The app will present photos, hystory a
 		<li>all data will be fetched from a remote server;</li>
 		<li>the intent is to display car information to users;</li>
 		<li>there will be animations when switching between car models;</li>
-	<ul>
+	</ul>
