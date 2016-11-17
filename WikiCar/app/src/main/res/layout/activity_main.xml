@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.cicioflaviu.wikicar.wikicar.MainActivity">
+
+
+    <EditText
+        android:id="@+id/carNameEdt"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_width="fill_parent"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/addBtn"
+        android:inputType="textNoSuggestions"/>
+
+    <Button
+        android:text="Add New Car"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:id="@+id/addBtn"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <ListView
+        android:id="@+id/carList"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        android:layout_height="300dp"
+        android:scrollbars="vertical"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/addBtn"
+        android:layout_alignParentBottom="true">
+
+    </ListView>
+
+
+</RelativeLayout>
