@@ -8,10 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-/**
- * Created by Cicio Flaviu on 17.11.2016.
- */
-
 public class ModifyCarActivity extends AppCompatActivity {
     Button saveBtn;
     EditText carNameEdt;

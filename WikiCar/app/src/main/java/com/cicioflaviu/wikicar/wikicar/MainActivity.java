@@ -1,9 +1,9 @@
 package com.cicioflaviu.wikicar.wikicar;
-
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,10 +24,23 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> arrayAdapter;
     long pos = -1;
 
+    DatabaseHelper carDatabase;
+    CarCursorAdapter carCursorAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //DATABASE
+        carDatabase = new DatabaseHelper(this);
+        carCursorAdapter = new CarCursorAdapter(this, carDatabase.getAllCars());
+
+        //TEST DATA
+        carDatabase.insertCar("Mercedes-Benz", "S65 AMG", "DRIVING PERFORMANCE IN ITS PERFECT FORM.");
+        carDatabase.insertCar("Nissan", "GT-R", "MORE THAN JUST MUSCLE");
+        carDatabase.insertCar("Tesla", "Model S", "Performance and safety refined.");
+
 
         String[] array = {"Car1", "Car2", "Car3"};
         carArray.addAll((Arrays.asList(array)));
@@ -36,24 +49,33 @@ public class MainActivity extends AppCompatActivity {
         carList = (ListView) findViewById(R.id.carList);
         carNameEdt = (EditText) findViewById(R.id.carNameEdt);
         arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, carArray);
-        carList.setAdapter(arrayAdapter);
+        carList.setAdapter(carCursorAdapter);
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                carArray.add(carNameEdt.getText().toString());
-                arrayAdapter.notifyDataSetChanged();
+                DialogFragment newFragment = new AddCarDialog();
+                newFragment.show(getSupportFragmentManager(), "missiles");
             }
         });
 
+        final SwipeDetector swipeDetector = new SwipeDetector();
+
+        carList.setOnTouchListener(swipeDetector);
         carList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent modifyActivity = new Intent(MainActivity.this, ModifyCarActivity.class);
-                modifyActivity.putExtra("carName", (String) parent.getItemAtPosition(position));
-                System.out.println("Selected ITEM: " + parent.getItemAtPosition(position));
-                startActivityForResult(modifyActivity, 0);
-                pos = position;
+                if (swipeDetector.swipeDetected()) {
+                    String removedCar = carArray.remove(position);
+                    arrayAdapter.notifyDataSetChanged();
+                    Toast.makeText(MainActivity.this, removedCar + " was deleted", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent modifyActivity = new Intent(MainActivity.this, ModifyCarActivity.class);
+                    modifyActivity.putExtra("carName", (String) parent.getItemAtPosition(position));
+                    System.out.println("Selected ITEM: " + parent.getItemAtPosition(position));
+                    startActivityForResult(modifyActivity, 0);
+                    pos = position;
+                }
             }
         });
 
