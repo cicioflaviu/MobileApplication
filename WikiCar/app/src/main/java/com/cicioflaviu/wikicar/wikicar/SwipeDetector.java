@@ -15,7 +15,7 @@ public class SwipeDetector implements View.OnTouchListener {
     }
 
     private static final String logTag = "SwipeDetector";
-    private static final int HORIZONTAL_MIN_DISTANCE = 40;
+    private static final int HORIZONTAL_MIN_DISTANCE = 100;
     private static final int VERTICAL_MIN_DISTANCE = 80;
     private float downX, downY, upX, upY;
     private Action mSwipeDetected = Action.None;
@@ -48,12 +48,12 @@ public class SwipeDetector implements View.OnTouchListener {
                 if (Math.abs(deltaX) > HORIZONTAL_MIN_DISTANCE) {
                     // left or right
                     if (deltaX < 0) {
-                        Log.i(logTag, "Swipe Left to Right");
+//                        Log.i(logTag, "Swipe Left to Right");
                         mSwipeDetected = Action.LR;
                         return true;
                     }
                     if (deltaX > 0) {
-                        Log.i(logTag, "Swipe Right to Left");
+//                        Log.i(logTag, "Swipe Right to Left");
                         mSwipeDetected = Action.RL;
                         return true;
                     }
@@ -63,12 +63,12 @@ public class SwipeDetector implements View.OnTouchListener {
                     if (Math.abs(deltaY) > VERTICAL_MIN_DISTANCE) {
                         // top or down
                         if (deltaY < 0) {
-                            Log.i(logTag, "Swipe Top to Bottom");
+//                            Log.i(logTag, "Swipe Top to Bottom");
                             mSwipeDetected = Action.TB;
                             return false;
                         }
                         if (deltaY > 0) {
-                            Log.i(logTag, "Swipe Bottom to Top");
+//                            Log.i(logTag, "Swipe Bottom to Top");
                             mSwipeDetected = Action.BT;
                             return false;
                         }

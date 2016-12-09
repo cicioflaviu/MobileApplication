@@ -45,8 +45,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.insert(DATABASE_TABLE_NAME, null, contentValues) != -1;
     }
 
+    public int updateCar(Long id, String make, String model, String description) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DATABASE_COL_2, make);
+        contentValues.put(DATABASE_COL_3, model);
+        contentValues.put(DATABASE_COL_4, description);
+        return db.update(DATABASE_TABLE_NAME, contentValues, "id=" + id, null);
+    }
+
     public Cursor getAllCars() {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT rowid _id,* FROM " + DATABASE_TABLE_NAME, null);
+    }
+
+    public int deleteCar(long id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(DATABASE_TABLE_NAME, "id=" + id, null);
+    }
+
+    public int clear() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(DATABASE_TABLE_NAME, null, null);
     }
 }

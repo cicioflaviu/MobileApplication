@@ -10,15 +10,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.cicioflaviu.wikicar.wikicar.ModifyCarActivity">
 
-    <TextView
-        android:id="@+id/carNameTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:text="Car Name"/>
-
     <Button
-        android:text="Save Car"
+        android:text="Update Car"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="86dp"
@@ -27,11 +20,69 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:id="@+id/carMakeTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Make"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:layout_alignParentStart="true" />
+
     <EditText
-        android:id="@+id/carNameEdt"
+        android:id="@+id/carMakeEdt"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_alignParentTop="true"
+        android:inputType="textNoSuggestions"
+        android:layout_below="@+id/carMakeTxt"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:id="@+id/carDescriptionEdt"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:inputType="textNoSuggestions"
+        android:layout_above="@+id/save_button"
+        android:layout_marginBottom="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/carDescriptionTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:layout_above="@+id/carDescriptionEdt"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/carModelTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Model"
+        android:layout_below="@+id/carMakeEdt"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="45dp" />
+
+    <EditText
+        android:id="@+id/carModelEdt"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:inputType="textNoSuggestions"
+        android:layout_below="@+id/carModelTxt"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/carDescriptionTxt"
+        android:layout_marginBottom="28dp"
         android:layout_alignParentEnd="true"
-        android:inputType="textNoSuggestions"/>
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/save_button" />
+
 </RelativeLayout>

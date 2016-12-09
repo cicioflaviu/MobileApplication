@@ -21,12 +21,15 @@ public class CarCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         // Find fields to populate in inflated template
+        TextView carId = (TextView) view.findViewById(R.id.carId);
         TextView carMake = (TextView) view.findViewById(R.id.carMake);
         TextView carModel = (TextView) view.findViewById(R.id.carModel);
         // Extract properties from cursor
+        String idStr = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.DATABASE_COL_1));
         String makeStr = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.DATABASE_COL_2));
         String modelStr = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.DATABASE_COL_3));
         // Populate fields with extracted properties
+        carId.setText(idStr);
         carMake.setText(makeStr);
         carModel.setText(modelStr);
     }

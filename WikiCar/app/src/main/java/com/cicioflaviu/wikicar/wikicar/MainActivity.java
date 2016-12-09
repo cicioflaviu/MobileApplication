@@ -1,5 +1,7 @@
 package com.cicioflaviu.wikicar.wikicar;
+
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -16,9 +18,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AddCarDialogListener{
     Button addBtn;
-    EditText carNameEdt;
     List<String> carArray = new ArrayList<>();
     ListView carList;
     ArrayAdapter<String> arrayAdapter;
@@ -37,9 +38,10 @@ public class MainActivity extends AppCompatActivity {
         carCursorAdapter = new CarCursorAdapter(this, carDatabase.getAllCars());
 
         //TEST DATA
-        carDatabase.insertCar("Mercedes-Benz", "S65 AMG", "DRIVING PERFORMANCE IN ITS PERFECT FORM.");
-        carDatabase.insertCar("Nissan", "GT-R", "MORE THAN JUST MUSCLE");
-        carDatabase.insertCar("Tesla", "Model S", "Performance and safety refined.");
+//        carDatabase.clear();
+//        carDatabase.insertCar("Mercedes-Benz", "S65 AMG", "DRIVING PERFORMANCE IN ITS PERFECT FORM.");
+//        carDatabase.insertCar("Nissan", "GT-R", "MORE THAN JUST MUSCLE");
+//        carDatabase.insertCar("Tesla", "Model S", "Performance and safety refined.");
 
 
         String[] array = {"Car1", "Car2", "Car3"};
@@ -47,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
 
         addBtn = (Button) findViewById(R.id.addBtn);
         carList = (ListView) findViewById(R.id.carList);
-        carNameEdt = (EditText) findViewById(R.id.carNameEdt);
         arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, carArray);
         carList.setAdapter(carCursorAdapter);
 
@@ -66,13 +67,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (swipeDetector.swipeDetected()) {
-                    String removedCar = carArray.remove(position);
-                    arrayAdapter.notifyDataSetChanged();
-                    Toast.makeText(MainActivity.this, removedCar + " was deleted", Toast.LENGTH_SHORT).show();
+                    carDatabase.deleteCar(id);
+                    carCursorAdapter.swapCursor(carDatabase.getAllCars());
+                    carCursorAdapter.notifyDataSetChanged();
+                    Toast.makeText(MainActivity.this, "Car with id " + id + " was deleted", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent modifyActivity = new Intent(MainActivity.this, ModifyCarActivity.class);
-                    modifyActivity.putExtra("carName", (String) parent.getItemAtPosition(position));
-                    System.out.println("Selected ITEM: " + parent.getItemAtPosition(position));
+                    modifyActivity.putExtra("carId", id);
+                    modifyActivity.putExtra("carMake", ((Cursor)parent.getItemAtPosition(position)).getString(2));
+                    modifyActivity.putExtra("carModel", ((Cursor)parent.getItemAtPosition(position)).getString(3));
+                    modifyActivity.putExtra("carDescription", ((Cursor)parent.getItemAtPosition(position)).getString(4));
+//                    System.out.println("Selected ITEM: " + parent.getItemAtPosition(position));
                     startActivityForResult(modifyActivity, 0);
                     pos = position;
                 }
@@ -96,12 +101,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
-            String result = data.getStringExtra("carName");
-            carArray.set(Integer.parseInt(Long.toString(pos)), result);
-            arrayAdapter.notifyDataSetChanged();
+            Long id = data.getLongExtra("carId", -1);
+            String make = data.getStringExtra("carMake");
+            String model = data.getStringExtra("carModel");
+            String description = data.getStringExtra("carDescription");
+            carDatabase.updateCar(id, make, model, description);
+            carCursorAdapter.swapCursor(carDatabase.getAllCars());
+            carCursorAdapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void addButtonClicked(String make, String model, String description) {
+        carDatabase.insertCar(make, model, description);
+        carCursorAdapter.swapCursor(carDatabase.getAllCars());
+        carCursorAdapter.notifyDataSetChanged();
     }
 }
