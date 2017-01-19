@@ -21,26 +21,22 @@ import com.google.firebase.auth.FirebaseAuth;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button signIn;
-    private Button deleteBtn;
     private EditText emailTxt;
     private EditText passwordTxt;
     private TextView textViewSignUp;
     private FirebaseAuth firebaseAuth;
-    private Firebase
     private ProgressDialog progressDialog;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         signIn = (Button) findViewById(R.id.btnSignIn);
-        deleteBtn = (Button) findViewById(R.id.btnDelete);
         emailTxt = (EditText) findViewById(R.id.editTextEmail);
         firebaseAuth = FirebaseAuth.getInstance();
         passwordTxt = (EditText) findViewById(R.id.editTextPassword);
         textViewSignUp = (TextView) findViewById(R.id.txtViewSignUp);
         progressDialog = new ProgressDialog(this);
         signIn.setOnClickListener(this);
-        deleteBtn.setOnClickListener(this);
         textViewSignUp.setOnClickListener(this);
 //        if(firebaseAuth.getCurrentUser() != null){
 //            finish();
@@ -55,8 +51,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } else if(v ==textViewSignUp){
             finish();
             startActivity(new Intent(this, AuthActivity.class));
-        } else if(v == deleteBtn){
-            //delete account
         }
     }
 
