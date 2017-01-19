@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "932679131239",
+    "firebase_url": "https://wikicar-b3659.firebaseio.com",
+    "project_id": "wikicar-b3659",
+    "storage_bucket": "wikicar-b3659.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:932679131239:android:2d389b889134fa3b",
+        "android_client_info": {
+          "package_name": "com.wikicar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "932679131239-0sk2jdeocasf33fnsg513nphjm71ipk8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCHChMh4Ap22KfoX_BANrxqqtK6G0aHd8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:932679131239:android:e55df3c2da5e07ed",
+        "android_client_info": {
+          "package_name": "com.cicioflaviu.wikicar.wikicar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "932679131239-0sk2jdeocasf33fnsg513nphjm71ipk8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCHChMh4Ap22KfoX_BANrxqqtK6G0aHd8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -10,7 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.cicioflaviu.wikicar.wikicar.MainActivity">
 
-
     <!--<EditText-->
         <!--android:id="@+id/carNameEdt"-->
         <!--android:layout_height="50dp"-->
@@ -39,6 +38,7 @@
         android:layout_alignParentBottom="true">
 
     </ListView>
+
 
 
 </RelativeLayout>

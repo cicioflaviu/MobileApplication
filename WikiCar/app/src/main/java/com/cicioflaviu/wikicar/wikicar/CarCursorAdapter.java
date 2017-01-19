@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
+import com.cicioflaviu.wikicar.wikicar.data.CarContract;
+
 public class CarCursorAdapter extends CursorAdapter {
     public CarCursorAdapter(Context context, Cursor c) {
         super(context, c, 0);
@@ -25,9 +27,9 @@ public class CarCursorAdapter extends CursorAdapter {
         TextView carMake = (TextView) view.findViewById(R.id.carMake);
         TextView carModel = (TextView) view.findViewById(R.id.carModel);
         // Extract properties from cursor
-        String idStr = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.DATABASE_COL_1));
-        String makeStr = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.DATABASE_COL_2));
-        String modelStr = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.DATABASE_COL_3));
+        String idStr = cursor.getString(cursor.getColumnIndexOrThrow(CarContract.DATABASE_COL_1));
+        String makeStr = cursor.getString(cursor.getColumnIndexOrThrow(CarContract.DATABASE_COL_2));
+        String modelStr = cursor.getString(cursor.getColumnIndexOrThrow(CarContract.DATABASE_COL_3));
         // Populate fields with extracted properties
         carId.setText(idStr);
         carMake.setText(makeStr);
